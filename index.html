@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Velocimetro</title>
+    <style type="text/css">
+        body {
+            background: snow;
+            color: black;
+        }
+
+        .card {
+            background-color: #dbf1d7;
+            width: 400px;
+            padding: 20px;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            box-shadow: 0 3px 10px rgb(0 0 0);
+        }
+
+        .result {
+            font-size: 5em;
+            line-height: 1.3em;
+            text-align: center !important;
+        }
+
+        .message {
+            text-align: center;
+            font-weight: bold;
+            color: #221f1f;
+            font-size: 4.5vh;
+            line-height: 6vh;
+            min-height: 6vh;
+
+        }
+    </style>
+
+    <style type="text/css">
+        .lds-facebook {
+            display: inline-block;
+            position: relative;
+            width: 80px;
+            height: 80px;
+        }
+
+        .lds-facebook div {
+            display: inline-block;
+            position: absolute;
+            left: 8px;
+            width: 16px;
+            background: #fff;
+            animation: lds-facebook 1.2s cubic-bezier(0, 0.5, 0.5, 1) infinite;
+        }
+
+        .lds-facebook div:nth-child(1) {
+            left: 8px;
+            animation-delay: -0.24s;
+        }
+
+        .lds-facebook div:nth-child(2) {
+            left: 32px;
+            animation-delay: -0.16s;
+        }
+
+        .lds-facebook div:nth-child(3) {
+            left: 56px;
+            animation-delay: -0.08s;
+        }
+
+        .lds-facebook div:nth-child(4) {
+            left: 80px;
+            animation-delay: 0;
+        }
+        
+        @keyframes lds-facebook {
+            0% {
+                top: 8px;
+                height: 64px;
+            }
+
+            50% {
+                top: 16px;
+                height: 48px;
+            }
+
+            75% {
+                top: 24px;
+                height: 32px;
+            }
+            
+            100% {
+                top: 32px;
+                height: 16px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <h1>Calcular a Velocidade da internet</h1>
+    <div class="card">
+        <div class="message" id="progress">
+            Calculando Velocidade...
+        </div>
+        <div class="result">
+            <div id="result">...</div>
+            <div class="lds-facebook" id="loading">
+                <div style="background: #e03b3b;"></div>
+                <div style="background: #55d68b;"></div>
+                <div style="background: #2d5aec;"></div>
+                <div style="background: #e8eb38;"></div>
+            </div>
+        </div>
+    </div>
+</body>
+<script type="text/javascript">
+    
+    if (window.addEventListener) {
+        window.addEventListener('load', InitiateSpeedDetection, false);
+    } else {
+        window.addEventListener('onload', InitiateSpeedDetection);
+    }
+
+    var imageAddr = 'https://4k-uhd.nl/wp-content/uploads/2018/08/4K-3840x2160-Wallpaper-Uitzicht-5.jpg';
+    var downloadSize = 5739426;
+    var downloadSize = 5742592;
+
+    function ShowProgressMessage(msg) {
+        var oProgress = document.getElementById('progress');
+        if (oProgress) {
+            oProgress.innerHTML = msg;
+        }
+    }
+
+    function InitiateSpeedDetection() {
+        ShowProgressMessage('Calculando Velocidade...');
+        window.setTimeout(MeasureConnectionSpeed, 1);
+    }
+
+    function showResultMessage(msg) {
+        document.getElementById('result').innerHTML = msg;
+        document.getElementById('progress').innerHTML = 'Sua velocidade é ';
+    }
+
+    function MeasureConnectionSpeed() {
+        var startTime, endTime;
+        var download = new Image();
+
+        download.onload = function() {
+            endTime = (new Date()).getTime();
+            showResults();
+        }
+
+        download.onerror = function(err, msg) {
+            ShowProgressMessage("Imagem Inválida ou erro ao baixar imagem!");
+        }
+
+        startTime = (new Date()).getTime()
+        var cacheBuster = "?nnn=" + startTime;
+        download.src = imageAddr + cacheBuster;
+
+        function showResults() {
+            var duration = (endTime - startTime) / 1000;
+            var bitsLoaded = downloadSize * 8;
+            var speedBps = (bitsLoaded / duration).toFixed(2);
+            var speedKbps = (speedBps / 1024).toFixed(2);
+            var speedMbps = (speedKbps / 1024).toFixed(2);
+            document.getElementById('loading').style.display = "none";
+            showResultMessage(speedMbps + " Mbps");
+
+            console.log(endTime, startTime, bitsLoaded, speedBps, speedKbps, speedMbps);
+        }
+    }
+
+
+</script>
+</html>

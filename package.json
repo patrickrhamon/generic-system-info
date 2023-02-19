@@ -1,0 +1,19 @@
+{
+  "name": "velocimetro",
+  "version": "1.0.0",
+  "description": "",
+  "main": "app.js",
+  "scripts": {
+    "start": "node app.js",
+    "electron": "electron ."
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "fast-cli": "^3.2.0"
+  },
+  "devDependencies": {
+    "electron": "^23.1.0"
+  }
+}

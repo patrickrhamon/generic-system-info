@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>INFO System</title>
+
+    <style type="text/css">
+        * {
+            padding: 0;
+            margin: 0;
+            box-sizing: border-box;
+        }
+
+        .wrapper {
+            width: 350px;
+            height: 160px;
+            overflow: hidden;
+            display: flex;
+            -webkit-app-region: drag;
+        }
+
+        .app {
+            position: relative;
+            padding: 24px;
+            width: 370px;
+            height: 170px;
+            border: 1px solid red;
+            -webkit-app-region: drag;
+            justify-content: last baseline;
+        }
+    </style>
+</head>
+<body class="app">
+    <div class="wrapper">
+        <div id="download">...</div><br>
+        <div id="upload">...</div>
+    </div>
+</body>
+
+<script type="text/javascript" src="scripts.js"></script>
+</html>

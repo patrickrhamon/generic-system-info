@@ -6,14 +6,11 @@
   "scripts": {
     "start": "node app.js",
     "electron": "electron .",
-    "make": "electron-packager D:\\projects\\node\\generic-system-info system_info --platform=win32 --arch=x64"
+    "make": "electron-packager D:\\projects\\node\\generic-system-info system_info --platform=win32 --arch=x64 --overwrite"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
-  "dependencies": {
-    "fast-cli": "^3.2.0"
-  },
   "devDependencies": {
     "electron": "^23.1.0",
     "electron-packager": "^17.1.1"

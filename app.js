@@ -1,7 +1,3 @@
-const path = require('path')
-const { exec } = require('child_process')
-const cp = require('child_process')
-
 const { app, BrowserWindow, screen } = require('electron')
 const { Collection } = require('./src/models/collection')
 const { Velocidade } = require('./src/models/velocidade')

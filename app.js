@@ -1,49 +1,69 @@
-const { app, BrowserWindow, screen } = require('electron');
-const path = require('path');
-const { exec } = require('child_process');
-const { Collection } = require('./src/collection');
-const { Velocidade } = require('./src/velocidade');
+const path = require('path')
+const { exec } = require('child_process')
+const cp = require('child_process')
 
-// import { app, BrowserWindow, screen } from 'electron'
-// import path from 'path'
-// import { exec } from 'child_process'
+const { app, BrowserWindow, screen } = require('electron')
+const { Collection } = require('./src/models/collection')
+const { Velocidade } = require('./src/models/velocidade')
+const { OperatingSystem } = require('./src/models/operating-system')
+const { FastCli } = require('./src/models/fast-cli')
 
-var historico = new Collection();
-var mainWindow = null;
+
+const defaultWidth = 735;
+const defaultHeight = 375;
+const defaultConsultInternetVelocity = 5 * 60
+const defaultGetInfoSystem = 1.5
+
+var historico = new Collection()
+var operatingSystem = new OperatingSystem()
+var fastCli = new FastCli()
+var mainWindow = null
 
 async function createWindow() {
+    var displays = screen.getAllDisplays()
+    var externalDisplay = displays.find((display) => {
+        return display.bounds.x !== 0 || display.bounds.y !== 0
+    })
+
     mainWindow = new BrowserWindow({
-        // width: 390,
-        // height: 190,
-        width: 1280,
-        height: 940,
+        width: defaultWidth,
+        height: defaultHeight,
         webPreferences: {
             nodeIntegration: true,
             contextIsolation: false
         },
-        frame: true,
+        frame: false,
         transparent: true,
-        resizable: true
+        resizable: false,
+        x: externalDisplay.bounds.x + (externalDisplay.bounds.width - defaultWidth),
+        y: externalDisplay.bounds.y + (externalDisplay.bounds.height - defaultHeight - 50)
     });
 
-    await mainWindow.loadFile('./src/pages/details.html');
+    await mainWindow.loadFile('./src/pages/details.html')
 
     mainWindow.on('will-move', function(event, rect) {
-        const { width, height } = screen.getPrimaryDisplay().workAreaSize;
+        const { width, height } = externalDisplay.workAreaSize
 
+        rect.y === 0 && event.preventDefault()
+        rect.x === 0 && event.preventDefault()
         rect.height + rect.y > height && event.preventDefault()
         rect.width + rect.x > width && event.preventDefault()
     });
 
-    mainWindow.webContents.openDevTools();
+    mainWindow.setMinimizable(false)
+
+    // mainWindow.webContents.openDevTools()
 }
 
 app.whenReady().then(() => {
-    createWindow();
+    createWindow()
 
-    getVelocity();
-    setInterval(getVelocity, 20000);
-});
+    getVelocity()
+    getOperatingSystemInfo()
+    
+    setInterval(getVelocity, defaultConsultInternetVelocity * 1000)
+    setInterval(getOperatingSystemInfo, defaultGetInfoSystem * 1000)
+})
 
 app.on('activate', () => {
     if (BrowserWindow.getAllWindows().length === 0){
@@ -55,31 +75,21 @@ app.on('window-all-closed', () => {
     if (process.platform !== 'darwin') app.quit()
 })
 
-function getVelocity() {
-    exec("fast --upload --json", (err, stdout, stderr) => {
-        if (err) {
-            console.log(`Error Occured: ${err.message}`);
-            return;
-        }
-    
-        if (stderr) {
-            console.log(`Stderr: ${stderr}`);
-            return;
-        }
+async function getVelocity() {
+    let output = await fastCli.consultVelocity()
 
-        let output = JSON.parse(stdout);
-        let download = `${output.downloadSpeed} Mbps`;
-        let upload = `${output.uploadSpeed} Mbps`;
-        
-        // console.log(`Download: ${download}  || Upload: ${upload}`);
+    let velocidade = new Velocidade(
+        output.downloadSpeed,
+        output.uploadSpeed,
+        new Date,
+    );
 
-        let velocidade = new Velocidade(
-            output.downloadSpeed,
-            output.uploadSpeed,
-            new Date,
-        );
+    historico.add(velocidade);
+    mainWindow.webContents.send('set-velocity', velocidade)
+    mainWindow.webContents.send('set-history', historico)
+}
 
-        historico.add(velocidade);
-        mainWindow.webContents.send('set-velocity', velocidade);
-    });
+function getOperatingSystemInfo() {
+    operatingSystem.updateFreeMemory()
+    mainWindow.webContents.send('set-cpu', operatingSystem);
 }

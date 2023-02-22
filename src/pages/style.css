@@ -1,0 +1,52 @@
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+.wrapper-network {
+    margin: 2px;
+    width: 350px;
+    height: 160px;
+    border: 1px solid rgba(219, 118, 118, 0.911);
+    -webkit-app-region: drag;
+    background-color: rgba(0, 0, 0, 0.0);
+    padding: 5px 0px 0px 5px;
+}
+
+.wrapper-cpu {
+    margin: 2px;
+    width: 350px;
+    height: 160px;
+    border: 1px solid rgba(219, 118, 118, 0.911);
+    -webkit-app-region: drag;
+    background-color: rgba(0, 0, 0, 0.0);
+    padding: 5px 0px 0px 5px;
+}
+
+.wrapper-graphic {
+    margin: 2px;
+    width: 704px;
+    height: 160px;
+    border: 1px solid rgba(219, 118, 118, 0.911);
+    padding: 0;
+    -webkit-app-region: drag;
+    background-color: rgba(0, 0, 0, 0.0);
+}
+
+.app {
+    position: relative;
+    padding: 24px;
+    width: 732px;
+    height: 180px;
+    display: flex;
+    -webkit-app-region: drag;
+    justify-content: last baseline;
+    background-color: rgba(53, 52, 52, 0.322);
+    color: rgba(240, 248, 255, 0.767);
+}
+
+canvas {
+    width: 702px;
+    height: 158px;
+}

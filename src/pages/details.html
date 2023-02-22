@@ -6,36 +6,31 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>INFO System</title>
 
-    <style type="text/css">
-        * {
-            padding: 0;
-            margin: 0;
-            box-sizing: border-box;
-        }
-
-        .wrapper {
-            width: 350px;
-            height: 160px;
-            overflow: hidden;
-            display: flex;
-            -webkit-app-region: drag;
-        }
-
-        .app {
-            position: relative;
-            padding: 24px;
-            width: 370px;
-            height: 170px;
-            border: 1px solid red;
-            -webkit-app-region: drag;
-            justify-content: last baseline;
-        }
-    </style>
+    <link href="css/bootstrap.min.css" rel="stylesheet" crossorigin="anonymous">
+    <script src="js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
+    <script src="js/chart.min.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body class="app">
-    <div class="wrapper">
-        <div id="download">...</div><br>
-        <div id="upload">...</div>
+    <div class="row">
+        <div class="wrapper-network col-6">
+            <h6>Dados de Internet</h6>
+            <h7>Download: <span id="download"> Aguardando Consulta ... </span></h7><br />
+            <h7>Upload: <span id="upload"> Aguardando Consulta ... </span></h7><br />
+            <h7>Média Download: <span id="mediaDownload"> Aguardando Consulta ... </span></h7><br />
+            <h7>Média Upload: <span id="mediaUpload"> Aguardando Consulta ... </span></h7>
+        </div>
+        <div class="wrapper-cpu col-6">
+            <h6>Dados da Máquina</h6>
+            <h7><span id="cpu"> ... </span></h7><br />
+            <h7>Clock: <span id="clock"> ... </span></h7><br />
+            <h7>Cores/Threads: <span id="thread"> ... </span></h7><br />
+            <h7>Memória: <span id="memory"> ... </span></h7><br />
+            <h7>Memória livre: <span id="memoryFree"> ... </span></h7>
+        </div>
+        <div class="wrapper-graphic col-12">
+            <canvas id="grafico"></canvas>
+        </div>
     </div>
 </body>
 

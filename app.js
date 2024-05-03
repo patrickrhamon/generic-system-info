@@ -51,7 +51,10 @@ async function createWindow() {
     // mainWindow.webContents.openDevTools()
 }
 
-app.whenReady().then(() => {
+
+
+app.whenReady()
+.then(() => {
     createWindow()
 
     getVelocity()

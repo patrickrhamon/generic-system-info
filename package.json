@@ -3,10 +3,11 @@
   "version": "1.0.0",
   "description": "",
   "main": "app.js",
+  "type": "commonjs",
   "scripts": {
     "start": "node app.js",
     "electron": "electron .",
-    "make": "electron-packager D:\\projects\\node\\generic-system-info system_info --platform=win32 --arch=x64 --overwrite"
+    "make-win": "electron-packager /home/patrick/estudos/javascript/generic-system-info system_info --platform=win32 --arch=x64 --overwrite"
   },
   "keywords": [],
   "author": "",

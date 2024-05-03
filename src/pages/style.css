@@ -4,32 +4,13 @@
     box-sizing: border-box;
 }
 
-.wrapper-network {
-    margin: 2px;
-    width: 350px;
-    height: 160px;
-    border: 1px solid rgba(219, 118, 118, 0.911);
-    -webkit-app-region: drag;
-    background-color: rgba(0, 0, 0, 0.0);
-    padding: 5px 0px 0px 5px;
-}
 
 .wrapper-cpu {
-    margin: 2px;
-    width: 350px;
-    height: 160px;
-    border: 1px solid rgba(219, 118, 118, 0.911);
-    -webkit-app-region: drag;
-    background-color: rgba(0, 0, 0, 0.0);
-    padding: 5px 0px 0px 5px;
-}
-
-.wrapper-graphic {
     margin: 2px;
     width: 704px;
     height: 160px;
     border: 1px solid rgba(219, 118, 118, 0.911);
-    padding: 0;
+    padding: 2px;
     -webkit-app-region: drag;
     background-color: rgba(0, 0, 0, 0.0);
 }

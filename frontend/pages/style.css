@@ -1,0 +1,27 @@
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+.wrapper-cpu {
+    margin: 2px;
+    width: 704px;
+    height: 320px;
+    border: 1px solid rgba(226, 20, 20, 0.911);
+    padding: 10px;
+    -webkit-app-region: drag;
+    background-color: rgba(0, 0, 0, 0.0);
+}
+
+.app {
+    position: relative;
+    padding: 24px;
+    width: 732px;
+    height: 360px;
+    display: flex;
+    -webkit-app-region: drag;
+    justify-content: last baseline;
+    background-color: rgba(53, 52, 52, 0.322);
+    color: rgba(240, 248, 255, 0.767);
+}

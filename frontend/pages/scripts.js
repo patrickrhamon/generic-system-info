@@ -5,9 +5,9 @@ function getUsedMemory(total, free) {
 }
 
 ipcRenderer.on('set-cpu', function (event, data) {
-    document.getElementById('cpu').innerHTML = data.cpu.model.replace(/\s+/g, ' ').trim();
-    document.getElementById('clock').innerHTML = (data.cpu.speed / 1000).toFixed(2) + ' GHz';
-    document.getElementById('thread').innerHTML = data.cpusLength;
-    document.getElementById('memory').innerHTML = innerHTML = getUsedMemory(data.totalMemory.reference, data.freeMemory.reference) +' / '+ data.totalMemory.giga;
-    document.getElementById('memoryFree'). innerHTML = data.freeMemory.giga;
+    document.getElementById('cpu').innerHTML = "";
+    document.getElementById('clock').innerHTML = "";
+    document.getElementById('thread').innerHTML = "";
+    document.getElementById('memory').innerHTML = "";
+    document.getElementById('memoryFree'). innerHTML = "";
 });

@@ -1,23 +1,18 @@
 {
-  "type": "module",
   "name": "dados",
   "version": "1.0.0",
   "description": "",
-  "main": "index.ts",
+  "main": "main.ts",
+  "type": "module",
   "scripts": {
-    "start": "tsc && electron .",
-    "debug": "tsc && electron . --trace-warnings",
+    "start": "electron .",
+    "debug": "electron . --trace-warnings",
     "make-win": "electron-packager /home/patrick/estudos/javascript/generic-system-info system_info --platform=win32 --arch=x64 --overwrite"
   },
   "keywords": [],
   "author": "Patrick Rhamon R. Miranda",
   "license": "ISC",
   "devDependencies": {
-    "electron": "^23.1.0",
-    "electron-packager": "^17.1.1",
-    "typescript": "^5.4.5"
-  },
-  "dependencies": {
-    "systeminformation": "^5.22.7"
+    "electron": "30.0.3"
   }
 }

@@ -1,0 +1,21 @@
+{
+  "name": "generic-system-info",
+  "version": "1.0.0",
+  "description": "",
+  "main": "./dist/index.js",
+  "scripts": {
+    "build": "tsc",
+    "start": "npm run build && electron .",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "electron": "^30.0.3",
+    "typescript": "^5.4.5"
+  },
+  "devDependencies": {
+    "@types/electron": "^1.6.10"
+  }
+}
